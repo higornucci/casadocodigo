@@ -10,7 +10,7 @@ public class SpringMVCConfigurator extends AbstractAnnotationConfigDispatcherSer
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {AppWebConfiguration.class};
+        return new Class[] {AppWebConfiguration.class, JpaConfiguration.class};
     }
 
     @Override

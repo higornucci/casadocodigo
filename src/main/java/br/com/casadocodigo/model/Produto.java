@@ -1,6 +1,14 @@
 package br.com.casadocodigo.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Produto {
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String titulo;
     private String descricao;
     private int paginas;
@@ -27,6 +35,10 @@ public class Produto {
 
     public void setPaginas(int paginas) {
         this.paginas = paginas;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
