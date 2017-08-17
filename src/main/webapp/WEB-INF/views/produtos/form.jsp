@@ -9,15 +9,15 @@
 <body>
     <form action="/produtos" method="post">
         <div>
-            <label for="titulo">Título</label>
+            <label for="titulo">Título*</label>
             <input id="titulo" type="text" name="titulo"/>
         </div>
         <div>
-            <label for="descricao">Descrição</label>
+            <label for="descricao">Descrição*</label>
             <textarea id="descricao" name="descricao" cols="20" rows="10"></textarea>
         </div>
         <div>
-            <label for="paginas">Páginas</label>
+            <label for="paginas">Páginas*</label>
             <input id="paginas" type="text" name="paginas"/>
         </div>
         <c:forEach items="${tipos}" var="tipoPreco" varStatus="status">
