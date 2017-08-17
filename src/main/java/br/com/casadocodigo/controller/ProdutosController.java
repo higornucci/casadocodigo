@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("produtos")
+@RequestMapping("/produtos")
 public class ProdutosController {
 
     @Autowired
@@ -39,7 +39,7 @@ public class ProdutosController {
         }
         produtoDao.gravar(produto);
         redirectAttributes.addFlashAttribute("sucesso","Produto cadastrado com sucesso!");
-        return new ModelAndView("redirect:produtos");
+        return new ModelAndView("redirect:/produtos");
     }
 
     @RequestMapping(method = RequestMethod.GET)
