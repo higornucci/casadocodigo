@@ -22,4 +22,8 @@ public class ProdutoDao {
     public List<Produto> listar(){
         return entityManager.createQuery("select p from Produto p", Produto.class).getResultList();
     }
+
+    public Produto find(int id) {
+        return entityManager.find(Produto.class, id);
+    }
 }
