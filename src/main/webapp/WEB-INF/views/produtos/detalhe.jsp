@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +50,7 @@
             <nav id="main-nav">
 
                 <ul class="clearfix">
-                    <li><a href="/carrinho" rel="nofollow">Carrinho</a></li>
+                    <li><a href="/carrinho" rel="nofollow">Carrinho (${carrinhoCompras.quantidade})</a></li>
 
                     <li><a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre Nós</a></li>
 
@@ -99,7 +100,7 @@
 
 
     <section class="buy-options clearfix">
-        <form action="/carrinho/add" method="post" class="container">
+        <form action='<c:url value="/carrinho/add" />' method="post" class="container">
             <ul id="variants" class="clearfix">
                 <input type="hidden" name="produtoId" value="${produto.id}"/>
                 <c:forEach items="${produto.precos}" var="preco">
