@@ -19,7 +19,7 @@ public class FileSaver {
             String realPath = httpServletRequest.getServletContext().getRealPath("/" + baseFolder);
             String path = realPath + "/" + multipartFile.getOriginalFilename();
             multipartFile.transferTo(new File(path));
-            return path;
+            return baseFolder + "/" + multipartFile.getOriginalFilename();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
