@@ -3,6 +3,7 @@ package br.com.casadocodigo.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -85,6 +86,10 @@ public class Produto {
     @Override
     public int hashCode() {
         return id;
+    }
+
+    public BigDecimal precoPara(TipoPreco tipoPreco) {
+        return precos.stream().filter(preco -> preco.getTipo().equals(tipoPreco)).findFirst().get().getValor();
     }
 
     @Override
