@@ -1,6 +1,7 @@
 package br.com.casadocodigo.model;
 
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -11,7 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Component
-@Scope(value = WebApplicationContext.SCOPE_SESSION)
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class CarrinhoCompras implements Serializable {
     private Map<CarrinhoItem, Integer> itens = new LinkedHashMap<>();
 
@@ -44,5 +45,11 @@ public class CarrinhoCompras implements Serializable {
             total = total.add(getTotal(item));
         }
         return total;
+    }
+
+    public void remover(Integer produtoId, TipoPreco tipoPreco) {
+        Produto produto = new Produto();
+        produto.setId(produtoId);
+        itens.remove(new CarrinhoItem(produto, tipoPreco));
     }
 }

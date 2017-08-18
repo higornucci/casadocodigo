@@ -102,4 +102,8 @@ public class Produto {
                 ", dataLancamento=" + dataLancamento +
                 '}';
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
