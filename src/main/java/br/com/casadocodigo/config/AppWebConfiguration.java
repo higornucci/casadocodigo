@@ -7,7 +7,6 @@ import br.com.casadocodigo.model.CarrinhoCompras;
 import com.google.common.cache.CacheBuilder;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +21,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -33,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 @EnableWebMvc
 @EnableCaching
 @ComponentScan(basePackageClasses = {HomeController.class, ProdutoDao.class, FileSaver.class, CarrinhoCompras.class})
-public class AppWebConfiguration {
+public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     public InternalResourceViewResolver internalResourceViewResolver() {
@@ -89,5 +90,10 @@ public class AppWebConfiguration {
         resolver.setViewResolvers(viewResolvers);
         resolver.setContentNegotiationManager(manager);
         return resolver;
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 }
