@@ -6,14 +6,11 @@ import br.com.casadocodigo.model.Produto;
 import br.com.casadocodigo.model.TipoPreco;
 import br.com.casadocodigo.validation.ProdutoValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,8 +22,14 @@ import java.util.List;
 @RequestMapping("/produtos")
 public class ProdutosController {
 
-    @Autowired private ProdutoDao produtoDao;
-    @Autowired private FileSaver fileSaver;
+    private final ProdutoDao produtoDao;
+    private final FileSaver fileSaver;
+
+    @Autowired
+    public ProdutosController(ProdutoDao produtoDao, FileSaver fileSaver) {
+        this.produtoDao = produtoDao;
+        this.fileSaver = fileSaver;
+    }
 
     @RequestMapping("form")
     public ModelAndView form(Produto produto){
@@ -36,8 +39,8 @@ public class ProdutosController {
     }
 
     @RequestMapping(method=RequestMethod.POST)
+    @CacheEvict(value="produtosHome", allEntries=true)
     public ModelAndView gravar(MultipartFile sumario, @Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes){
-
         if(result.hasErrors()){
             return form(produto);
         }
