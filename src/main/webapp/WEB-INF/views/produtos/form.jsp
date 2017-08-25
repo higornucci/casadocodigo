@@ -37,6 +37,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="${s:mvcUrl('PC#form').build()}">Cadastro de Produtos</a>
                 </li>
+                <li><a class="nav-link" href="/cart" rel="nofollow">Carrinho</a></li>
+                <li><a class="nav-link" href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre Nós</a></li>
             </ul>
         </div>
     </nav>

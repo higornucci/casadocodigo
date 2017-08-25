@@ -2,6 +2,7 @@ package br.com.casadocodigo.config;
 
 import br.com.casadocodigo.controller.HomeController;
 import br.com.casadocodigo.daos.ProdutoDao;
+import br.com.casadocodigo.daos.UsuarioDao;
 import br.com.casadocodigo.infra.FileSaver;
 import br.com.casadocodigo.model.CarrinhoCompras;
 import com.google.common.cache.CacheBuilder;
@@ -33,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 
 @EnableWebMvc
 @EnableCaching
-@ComponentScan(basePackageClasses = {HomeController.class, ProdutoDao.class, FileSaver.class, CarrinhoCompras.class})
+@ComponentScan(basePackageClasses = {HomeController.class, ProdutoDao.class, UsuarioDao.class, FileSaver.class, CarrinhoCompras.class})
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
