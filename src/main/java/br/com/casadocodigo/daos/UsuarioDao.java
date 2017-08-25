@@ -18,7 +18,7 @@ public class UsuarioDao implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-        List<Usuario> usuarios = manager.createQuery("select u from Usuario where u.email = :email", Usuario.class)
+        List<Usuario> usuarios = manager.createQuery("select u from Usuario u where u.email = :email", Usuario.class)
                 .setParameter("email", email).getResultList();
 
         if (usuarios.isEmpty()) {
