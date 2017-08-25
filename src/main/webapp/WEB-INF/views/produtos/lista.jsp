@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +31,14 @@
                 </li>
                 <li><a class="nav-link" href="/cart" rel="nofollow">Carrinho</a></li>
                 <li><a class="nav-link" href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre Nós</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="nav-link" href="#">
+                        <security:authentication property="principal" var="usuario"/>
+                        ${usuario.username}
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
