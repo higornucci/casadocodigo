@@ -1,11 +1,10 @@
 package br.com.casadocodigo.config;
 
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.Filter;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletRegistration;
+import javax.servlet.*;
 
 public class SpringMVCConfigurator extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -33,5 +32,12 @@ public class SpringMVCConfigurator extends AbstractAnnotationConfigDispatcherSer
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         registration.setMultipartConfig(new MultipartConfigElement(""));
+    }
+
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+        servletContext.addListener(new RequestContextListener());
+        servletContext.setInitParameter("spring.profiles.active", "dev");
     }
 }

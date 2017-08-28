@@ -30,21 +30,20 @@ public class JpaConfiguration {
     @Bean
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
-
-        entityManagerFactory.setPackagesToScan("br.com.casadocodigo.model");
         entityManagerFactory.setDataSource(dataSource);
+        entityManagerFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        Properties props = aditionalProperties();
+        entityManagerFactory.setJpaProperties(props);
+        entityManagerFactory.setPackagesToScan("br.com.casadocodigo.model");
+        return entityManagerFactory;
+    }
 
-        entityManagerFactory
-                .setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-
+    private Properties aditionalProperties(){
         Properties props = new Properties();
-
-        props.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        props.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         props.setProperty("hibernate.show_sql", "true");
         props.setProperty("hibernate.hbm2ddl.auto", "update");
-
-        entityManagerFactory.setJpaProperties(props);
-        return entityManagerFactory;
+        return props;
     }
 
     @Bean
